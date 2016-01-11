@@ -1,0 +1,15 @@
+db:
+  image: redis:3
+  ports:
+    - "6379:6379"
+
+web:
+  build: .
+  command: lein ring server
+  ports:
+    - "3000:3000"
+    - "7000:7000"
+  links:
+    - db
+  volumes:
+    - .:/redis-app
